@@ -9,7 +9,7 @@ class Proto extends AIInfo{
         return "Prototype AI for testing purposes.";
     }
     function GetVersion(){
-        return 1;
+        return 3;
     }
     function GetDate(){
         return "2024-12-06";
@@ -19,9 +19,6 @@ class Proto extends AIInfo{
     }
     function GetShortName(){
         return "PROT";
-    }
-    function GetAPIVersion(){
-        return "12";
     }
 }
 

@@ -1,29 +1,35 @@
-class Proto extends AIController
-{
+class Proto extends AIController {
+    AirController = null;
+
     function Start();
-}
+
+    constructor(){
+        require("Air.nut");
+        //require("Tram.nut");
+        this.AirController = Air();
+        //this.TramController = Tram();
+	}
+};
 
 function Proto::Start()
 {
+    Sleep(1)
     if (!AICompany.SetName("ProtoCorp")) {
         local i = 2;
-        while (!AICompant.SetName("ProtoCorp #" + i)){
+        while (!AICompany.SetName("ProtoCorp #" + i)){
             i++;
         }
     }
 
+    local ticker = 0;
 
     while (true) {
-        while (AIEventController.IsEventWaiting()) {
-            local e = AIEventController.GetNextEvent();
-            switch (e.GetEventType()) {
-                case AIEvent.ET_VEHICLE_CRASHED:
-                    local ec = AIEventVehicleCrashed.Convert(e);
-                    local v = ec.GetVehicleID();
-                    AILog.Info("We have a crashed vehicle (" + v + ")");
-                    /* Do something about it */
-                    break;
-            }
+        local cash = AICompany.GetBankBalance(AICompany.COMPANY_SELF);
+
+        if(ticker % 1000 == 0){
+            AirController.turn(cash);
+            //TramController.Turn(cash/2);
         }
+        Sleep(500);
     }
 }
