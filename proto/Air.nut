@@ -211,5 +211,5 @@ function Air::turn(x){
     this.funds = x;
     this.BuildAirportRoute();
     this.ManageAirRoutes();
-    return;
+    return profit;
 }
